@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Countries</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css} "/>
+	<style>
+		.countryTable
+		{
+			width: 50%;
+			margin: auto;
+		}
+	</style>
+</head>
+<body class="text-center">
+
+	<script>
+	function ajaxUpdateCountry()
+	{
+	    var http = new XMLHttpRequest();
+	    http.open("POST", "updateCountry", true);
+	    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	    let content = ""+
+	    "oldName="+document.querySelector("#updateCountryForm").children['oldName'].value +
+	    "&newName="+document.querySelector("#updateCountryForm").children['newName'].value;
+	    
+	    http.send(content);
+	    http.onload = function()
+	    {
+	        alert(http.responseText);
+	    }
+	}	
+	</script>
+
+
+	<nav class="navbar navbar-light bg-dark">
+	  <span class="navbar-brand mb-0 h1 text-light">Countries</span>
+	</nav>
+	
+	<section class="m-5">
+	
+		<div>
+			<h3>Update a country:</h3>
+			<form id="updateCountryForm" th:action="@{updateCountry}" method="post">
+				<div class="form-group">
+					<label> Name: <input type="text" name="oldName" class="form-control"/></label>
+					<br />
+					<label> New name: <input type="text" name="newName" class="form-control"/></label>
+					<br />
+					<input type="submit" class="btn btn-dark" value="Modify"/> <!-- onclick="ajaxUpdateCountry()" -->
+				</div>
+			</form>
+		</div>
+	
+		<div>
+			<table class="table countryTable">
+				<thead class="thead-light">
+					<tr>
+						<th>Country</th>
+						<th>Region</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="country : ${countries}">
+						<td data-th-text="${country.countryName}"></td>
+						<td data-th-text="${country.region.regionName}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
