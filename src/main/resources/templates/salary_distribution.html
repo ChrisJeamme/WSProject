@@ -1,34 +1,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Salary Distribution</title>
-	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css} "/>
-	<style>
-		.countryTable
-		{
-			width: 50%;
-			margin: auto;
-		}
-	</style>
+<title>Salary Distribution</title>
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css} " />
+<style>
+.countryTable {
+	width: 50%;
+	margin: auto;
+}
+</style>
 </head>
 <body class="text-center">
 
 	<nav class="navbar navbar-light bg-dark">
-	  <span class="navbar-brand mb-0 h1 text-light">Salary Distribution</span>
+		<span class="navbar-brand mb-0 h1 text-light">Salary
+			Distribution</span>
 	</nav>
-	
+
 	<section class="m-5">
-	
-	
-    <canvas id="chart" class="chartjs salaryChart" width="1540" height="400"></canvas>
-    
-					<h2>Employees</h2>
-					<div th:each="employee : ${employees}">
-						<span data-th-text="${employee.firstName}"></span>
-						<span data-th-text="${employee.lastName}"></span>
-					</div>
-	 
+
+
+		<canvas id="chart" class="chartjs salaryChart" width="1540"
+			height="400"></canvas>
+
+		<h2>Employees</h2>
+		<div th:each="employee : ${employees}">
+			<span data-th-text="${employee.firstName}"></span> <span
+				data-th-text="${employee.lastName}"></span>
+		</div>
+
 	</section>
-	
+
 	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
 	<script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
 
@@ -52,7 +54,7 @@
 	                "datasets":
 	                [
 	                    {
-	                        "label":"Salary / Employee",
+	                        "label":"Salary",
 	                        "data":[
 	                        	/*[# th:each="employee : ${employees}"]*/
 	                            	{"x":x++,"y":/*[[${employee.salary}]]*/,"r":5},
@@ -65,7 +67,30 @@
 	                    }
 	                ]
 	            },
-	            "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+	            "options":
+	            {
+	            	"scales":
+	            	{
+	            		"yAxes":
+	            		[
+	            			{
+	            				"ticks":
+	            				{
+	            					"beginAtZero":true
+	            				}
+	            			}
+	            		],
+	            		"xAxes":
+	            		[
+	            			{
+	            				"ticks":
+	            				{
+	            					autoSkip: false
+	            				}
+	            			}
+	            		]
+	            	}
+	            }
 	});
 
 	/*]]>*/

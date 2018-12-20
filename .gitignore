@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 spring.datasource.username=springuser
 spring.datasource.password=ThePassword
+=======
+>>>>>>> c019d62f045e74109590f62974fb324c78e07e8a
 # Created by https://www.gitignore.io/api/maven,eclipse,java-web
 # Edit at https://www.gitignore.io/?templates=maven,eclipse,java-web
 
@@ -112,6 +115,3 @@ buildNumber.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid
-
-# application.properties
-application.properties
