@@ -11,5 +11,6 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
 
 	//List<Country> findByLastName(@Param("country") String country);
 	List<Employee> findAll();
+	List<Employee> findByOrderBySalary();
 
 }

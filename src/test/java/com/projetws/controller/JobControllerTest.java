@@ -2,20 +2,11 @@ package com.projetws.controller;
 
 import static org.junit.Assert.*;
 
-import java.io.DataOutputStream;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.hibernate.service.spi.InjectService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
 import com.projetws.testtools.TestTools;
