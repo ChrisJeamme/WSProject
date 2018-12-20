@@ -32,7 +32,8 @@ public class CountryController
 	}
 	
 	@RequestMapping(value="/updateCountry", method=RequestMethod.POST)
-	public String updateCountry(@RequestParam("oldName") String oldName, @RequestParam("newName") String newName) {
+	public String updateCountry(@RequestParam("oldName") String oldName, @RequestParam("newName") String newName)
+	{
 		List<Country> countries = countryRepository.findByCountryName(oldName);
 		for (Country country : countries)
 		{

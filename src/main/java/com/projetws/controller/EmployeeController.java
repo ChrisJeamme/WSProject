@@ -28,6 +28,14 @@ public class EmployeeController
 	@Autowired
 	EmployeeRepository employeeRepository;
 	
+	@RequestMapping("/all")
+	public String getAllEmployees(Model m)
+	{
+		List<Employee> employees = employeeRepository.findByOrderBySalary();
+		m.addAttribute("employees", employees);
+		return "employees";
+	}
+	
 	@RequestMapping(value = "/firstName/{firstName}", method = RequestMethod.GET)
 	public @ResponseBody List<EmployeeDTO> getByFirstName(@PathVariable String firstName)
 	{
