@@ -1,6 +1,9 @@
 package com.projetws.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -58,6 +61,41 @@ public class EmployeeController
 	{
 		List<Employee> employees = employeeRepository.findByOrderBySalary();
 		m.addAttribute("employees", employees);
+		
+		HashMap<String, Integer> salaryRangeList = new LinkedHashMap<>();
+		BigDecimal salaryMin = employees.get(0).getSalary();
+		BigDecimal salaryMax = employees.get(employees.size()-1).getSalary();
+		BigDecimal salaryGap = salaryMax.subtract(salaryMin);
+		BigDecimal rangeSize = salaryGap.divide(new BigDecimal(10));
+		
+		BigDecimal lowerSalary = salaryMin;
+		BigDecimal upperSalary = lowerSalary.add(rangeSize);
+		int nbEmployeesInRange = 0;
+		int i=0;
+		while (i<employees.size())
+		{
+			if(employees.get(i).getSalary().compareTo(upperSalary) <= 0) 
+			{
+				nbEmployeesInRange++;
+				i++;
+			}
+			else 
+			{
+				String key = lowerSalary.toString()+" - "+upperSalary.toString();
+				salaryRangeList.put(key, nbEmployeesInRange);
+				nbEmployeesInRange = 0;
+				lowerSalary = upperSalary;
+				upperSalary = lowerSalary.add(rangeSize);
+			}
+		}
+		String key = lowerSalary.toString()+" - "+upperSalary.toString();
+		salaryRangeList.put(key, nbEmployeesInRange);
+		nbEmployeesInRange = 0;
+		lowerSalary = upperSalary;
+		upperSalary = lowerSalary.add(rangeSize);
+		
+		
+		m.addAttribute("salaryRangeList", salaryRangeList);
 		return "salary_distribution";
 	}
 }
