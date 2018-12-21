@@ -23,20 +23,23 @@
 					<tr>
 						<th><strong>ID</strong></th>
 						<th>Country</th>
-						<th>Region</th>
+                        <th>Region</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="country : ${countries}">
+					<tr th:each="country : ${countries}" th:id="'row_' + ${country.countryId}">
 						<td data-th-text="${country.countryId}"></td>
 						<td data-th-text="${country.countryName}"></td>
-						<td data-th-text="${country.region.regionName}"></td>
+                        <td data-th-text="${country.region.regionName}"></td>
+                        <td><button th:id="'button_' + ${country.countryId}" class="btn btn-dark" onclick="editButtonPress(this)">Editer</button></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
     </section>
-    
-    <div th:insert:"../fragments/scripts.html :: div"></div>
+
+    <script th:src="@{/js/countries_functions.js}"></script>
+    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
 </body>
 </html>
