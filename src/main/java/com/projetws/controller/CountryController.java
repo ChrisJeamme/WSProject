@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projetws.model.Country;
 import com.projetws.model.CountryRepository;
+import com.projetws.model.Region;
+import com.projetws.model.RegionRepository;
 
 import io.swagger.annotations.Api;
 
@@ -22,24 +24,34 @@ public class CountryController
 
 	@Autowired
 	CountryRepository countryRepository;
+	@Autowired
+	RegionRepository regionRepository;
 
 	@RequestMapping("/all")
 	public String getAllCountries(Model m)
 	{
 		List<Country> countries = countryRepository.findAll();
+		List<Region> regions = regionRepository.findAll();
+		
 		m.addAttribute("countries", countries);
+		m.addAttribute("regions", regions);
 		return "countries";
 	}
 	
 	@RequestMapping(value="/updateCountry", method=RequestMethod.POST)
-	public String updateCountry(@RequestParam("oldName") String oldName, @RequestParam("newName") String newName)
+	public String updateCountry(@RequestParam("countryId") String id, @RequestParam("countryName") String name, @RequestParam("regionId") Long regionId)
 	{
-		List<Country> countries = countryRepository.findByCountryName(oldName);
-		for (Country country : countries)
+		Country country = countryRepository.findByCountryId(id);
+		if(country != null)
 		{
-			country.setCountryName(newName);
+			Region region = regionRepository.findByRegionId(regionId);
+			if(region!= null)
+			{
+				country.setCountryName(name);
+				country.setRegion(region);
+				countryRepository.save(country);
+			}
 		}
-		countryRepository.saveAll(countries);
 		return "redirect:/country/all";
 	}
 	

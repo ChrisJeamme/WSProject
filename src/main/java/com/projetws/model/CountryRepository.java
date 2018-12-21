@@ -11,4 +11,5 @@ public interface CountryRepository extends PagingAndSortingRepository<Country, L
 {
 	public List<Country> findAll();
 	public List<Country> findByCountryName(String countryName);
+	public Country findByCountryId(String id);
 }

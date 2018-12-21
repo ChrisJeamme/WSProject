@@ -8,10 +8,12 @@
 			<h3>Update a country:</h3>
 			<form id="updateCountryForm" th:action="@{updateCountry}" method="post">
 				<div class="form-group">
-					<label> Name: <input type="text" name="oldName" class="form-control"/></label>
-					<br />
-					<label> New name: <input type="text" name="newName" class="form-control"/></label>
-					<br />
+					<label> ID: <input type="text" name="countryId" id="formEditionId" class="form-control"/></label>
+                    <label> Name: <input type="text" name="countryName" id="formCountryName" class="form-control"/></label>
+					<label> Region: 
+                    <select id="formRegionId" name="regionId" class="custom-select">
+                        <option th:each="region : ${regions}" th:value="${region.regionId}" data-th-text="${region.regionName}"></option>
+                    </select></label>
 					<input type="submit" class="btn btn-dark" value="Modify"/> <!-- onclick="ajaxUpdateCountry()" -->
 				</div>
 			</form>
@@ -29,9 +31,10 @@
 				</thead>
 				<tbody>
 					<tr th:each="country : ${countries}" th:id="'row_' + ${country.countryId}">
-						<td data-th-text="${country.countryId}"></td>
-						<td data-th-text="${country.countryName}"></td>
-                        <td data-th-text="${country.region.regionName}"></td>
+						<td class="countryIdField" data-th-text="${country.countryId}"></td>
+						<td class="countryNameField" data-th-text="${country.countryName}"></td>
+                        <td class="regionNameField" data-th-text="${country.region.regionName}"></td>
+                        <td hidden class="regionIdField" data-th-text="${country.region.regionId}"></td>
                         <td><button th:id="'button_' + ${country.countryId}" class="btn btn-dark" onclick="editButtonPress(this)">Editer</button></td>
 					</tr>
 				</tbody>
