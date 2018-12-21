@@ -35,7 +35,7 @@
 						<td class="countryNameField" data-th-text="${country.countryName}"></td>
                         <td class="regionNameField" data-th-text="${country.region.regionName}"></td>
                         <td hidden class="regionIdField" data-th-text="${country.region.regionId}"></td>
-                        <td><button th:id="'button_' + ${country.countryId}" class="btn btn-dark" onclick="editButtonPress(this)">Editer</button></td>
+                        <td><button th:id="'button_' + ${country.countryId}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
 					</tr>
 				</tbody>
 			</table>

@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projetws.model.Country;
+import com.projetws.model.DepartementRepository;
+import com.projetws.model.Department;
 import com.projetws.model.Employee;
 import com.projetws.model.EmployeeDTO;
 import com.projetws.model.EmployeeRepository;
+import com.projetws.model.Job;
+import com.projetws.model.JobRepository;
 
 import io.swagger.annotations.Api;
 
@@ -30,12 +34,21 @@ public class EmployeeController
 {
 	@Autowired
 	EmployeeRepository employeeRepository;
+	@Autowired
+	JobRepository jobRepository;
+	@Autowired
+	DepartementRepository departmentRepository;
 	
 	@RequestMapping("/all")
 	public String getAllEmployees(Model m)
 	{
 		List<Employee> employees = employeeRepository.findByOrderBySalary();
+		List<Job> jobs = jobRepository.findAll();
+		List<Department> departements = departmentRepository.findAll();
+		
 		m.addAttribute("employees", employees);
+		m.addAttribute("jobs", jobs);
+		m.addAttribute("departements", departements);
 		return "employees";
 	}
 	
