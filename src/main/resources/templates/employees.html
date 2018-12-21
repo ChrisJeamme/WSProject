@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Employees Management')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Employees Management')"></header>
+
+	<section class="m-5">
+        <h2>Employees</h2>
+		<div th:each="employee : ${employees}">
+			<span data-th-text="${employee.firstName}"></span> <span
+				data-th-text="${employee.lastName}"></span>
+		</div>
+    </section>
+
+    <div th:insert:"../fragments/scripts.html :: div"></div>
+</body>
+</html>
