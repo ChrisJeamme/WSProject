@@ -1,21 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>Salary Distribution</title>
-<link rel="stylesheet"
-	th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css} " />
-<style>
-.countryTable {
-	width: 50%;
-	margin: auto;
-}
-</style>
-</head>
+<head th:replace="../fragments/head.html :: head('Employees : Salary Details')"></head>
 <body class="text-center">
-
-	<nav class="navbar navbar-light bg-dark">
-		<span class="navbar-brand mb-0 h1 text-light">Salary
-			Distribution</span>
-	</nav>
+    <header th:replace="../fragments/header.html :: header('Employees : Salary Details')"></header>
 
 	<section class="m-5">
 
