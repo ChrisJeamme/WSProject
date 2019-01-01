@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projetws.model.Country;
-import com.projetws.model.DepartementRepository;
+import com.projetws.model.DepartmentRepository;
 import com.projetws.model.Department;
 import com.projetws.model.Employee;
 import com.projetws.model.EmployeeDTO;
@@ -37,7 +37,7 @@ public class EmployeeController
 	@Autowired
 	JobRepository jobRepository;
 	@Autowired
-	DepartementRepository departmentRepository;
+	DepartmentRepository departmentRepository;
 	
 	@RequestMapping("/all")
 	public String getAllEmployees(Model m)
