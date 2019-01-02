@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
 
+import com.projetws.model.Country;
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
+import com.projetws.model.Region;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.Model;
 
 @Controller
 @RequestMapping("/job")
@@ -51,5 +54,34 @@ public class JobController
 	{
 		return jobRepository.findAllByMinSalaryGreaterThanOrderByMaxSalaryDesc(minimumSalary);
 	}
+	
+	
+	@RequestMapping("/all")
+	public String getAllCountries(Model m)
+	{
+		List<Job> jobs = jobRepository.findAll();
+
+		m.addAttribute("jobs", jobs);
+		return "jobs";
+	}
+	
+	@RequestMapping(value="/updateJob", method=RequestMethod.POST)
+	public String updateCountry(@RequestParam("jobId") String id, 
+								@RequestParam("jobTitle") String jobTitle, 
+								@RequestParam("minSalary") Long minSalary,  
+								@RequestParam("maxSalary") Long maxSalary)
+	{
+		Job job = jobRepository.findByJobId(id);
+		if(job != null)
+		{
+			job.setJobTitle(jobTitle);
+			job.setMinSalary(BigDecimal.valueOf(minSalary));
+			job.setMaxSalary(BigDecimal.valueOf(maxSalary));
+			jobRepository.save(job);
+		}
+		return "redirect:/job/all";
+	}
+	
+	
  
 }
