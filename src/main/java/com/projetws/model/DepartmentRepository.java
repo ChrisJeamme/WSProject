@@ -9,4 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface DepartmentRepository extends PagingAndSortingRepository<Department, Long>
 {
 	List<Department> findAll();
+	
+	Department findByDepartmentId(Long id);
 }

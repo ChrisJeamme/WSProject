@@ -9,6 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface LocationRepository extends PagingAndSortingRepository<Location, Long>
 {
 	List<Location> findAll();
-
-	Region findByLocationId(Long locationId);
+	
+	Location findByLocationId(Long locationId);
 }
