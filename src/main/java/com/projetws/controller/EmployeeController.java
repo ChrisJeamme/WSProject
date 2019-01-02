@@ -2,17 +2,20 @@ package com.projetws.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +27,7 @@ import com.projetws.model.EmployeeDTO;
 import com.projetws.model.EmployeeRepository;
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
+import com.projetws.model.Location;
 
 import io.swagger.annotations.Api;
 
@@ -50,6 +54,42 @@ public class EmployeeController
 		m.addAttribute("jobs", jobs);
 		m.addAttribute("departements", departements);
 		return "employees";
+	}
+	
+	@RequestMapping(value="/updateEmployee", method=RequestMethod.POST)
+	public String updateEmployee(@RequestParam("employeeId") Long employeeId, 
+								 @RequestParam("employeeFirstName") String firstName, 
+								 @RequestParam("employeeLastName") String lastName,
+								 @RequestParam("employeeCommissionPct") BigDecimal employeeCommissionPct,
+								 @RequestParam("employeeSalary") BigDecimal employeeSalary,
+								 @RequestParam("employeeEmail") String employeeEmail,
+								 @RequestParam("employeeManagerId") BigDecimal employeeManagerId,
+								 @RequestParam("employeeHireDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date employeeHireDate,
+								 @RequestParam("employeePhoneNumber") String employeePhoneNumber,
+								 @RequestParam("departementId") Long departementId,
+								 @RequestParam("jobId") String jobId)
+	{
+		Employee employee= employeeRepository.findByEmployeeId(employeeId);
+		if(employee != null)
+		{
+			Job job = jobRepository.findByJobId(jobId);
+			Department department = departmentRepository.findByDepartmentId(departementId);
+			if(job!= null && department != null)
+			{
+				employee.setFirstName(firstName);
+				employee.setLastName(lastName);
+				employee.setCommissionPct(employeeCommissionPct);
+				employee.setSalary(employeeSalary);
+				employee.setEmail(employeeEmail);
+				employee.setManagerId(employeeManagerId);
+				employee.setHireDate(employeeHireDate);
+				employee.setPhoneNumber(employeePhoneNumber);
+				employee.setDepartment(department);
+				employee.setJob(job);
+				employeeRepository.save(employee);
+			}
+		}
+		return "redirect:/employee/all";
 	}
 	
 	@RequestMapping(value = "/firstName/{firstName}", method = RequestMethod.GET)
