@@ -17,17 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.projetws.model.Country;
-import com.projetws.model.DepartmentRepository;
 import com.projetws.model.Department;
+import com.projetws.model.DepartmentRepository;
 import com.projetws.model.Employee;
 import com.projetws.model.EmployeeDTO;
 import com.projetws.model.EmployeeRepository;
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
-import com.projetws.model.Location;
 
 import io.swagger.annotations.Api;
 

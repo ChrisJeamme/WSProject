@@ -1,6 +1,5 @@
 package com.projetws.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.projetws.model.Department;
-import com.projetws.model.DepartmentRepository;
 import com.projetws.model.Location;
 import com.projetws.model.LocationRepository;
 

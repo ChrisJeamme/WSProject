@@ -7,18 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.ui.Model;
 
-import com.projetws.model.Country;
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
-import com.projetws.model.Region;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,7 +54,7 @@ public class JobController
 	
 	
 	@RequestMapping("/all")
-	public String getAllCountries(Model m)
+	public String getAllJobs(Model m)
 	{
 		List<Job> jobs = jobRepository.findAll();
 
@@ -66,7 +63,7 @@ public class JobController
 	}
 	
 	@RequestMapping(value="/updateJob", method=RequestMethod.POST)
-	public String updateCountry(@RequestParam("jobId") String id, 
+	public String updateJob(@RequestParam("jobId") String id, 
 								@RequestParam("jobTitle") String jobTitle, 
 								@RequestParam("minSalary") Long minSalary,  
 								@RequestParam("maxSalary") Long maxSalary)
