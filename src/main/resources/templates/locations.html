@@ -13,7 +13,10 @@
                     <label> Postal code: <input type="text" name="postalCode" id="formPostalCode" class="form-control"/></label>
                     <label> City: <input type="text" name="city" id="formCity" class="form-control"/></label>
                     <label> State province: <input type="text" name="stateProvince" id="formStateProvince" class="form-control"/></label>
-
+                    <label> Country: 
+                    <select id="formCountryId" name="countryId" class="custom-select">
+                        <option th:each="country : ${countries}" th:value="${country.countryId}" data-th-text="${country.countryName}"></option>
+                    </select></label>
 					<input type="submit" class="btn btn-dark" value="Modify"/> <!-- onclick="ajaxUpdateLocation()" -->
 				</div>
 			</form>
@@ -28,6 +31,7 @@
                         <th>Postal code</th>
                         <th>City</th>
                         <th>State province</th>
+                        <th>Country</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -38,6 +42,8 @@
 						<td class="postalCodeField" data-th-text="${location.postalCode}"></td>
                         <td class="cityField" data-th-text="${location.city}"></td>
                         <td class="stateProvinceField" data-th-text="${location.stateProvince}"></td>
+                        <td hidden class="countryIdField" data-th-text="${location.country.countryId}"></td>
+                        <td class="countryNameField" data-th-text="${location.country.countryName}"></td>
                         <td><button th:id="'button_' + ${location.locationId}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
 					</tr>
 				</tbody>

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.projetws.model.Country;
+import com.projetws.model.CountryRepository;
 import com.projetws.model.Location;
 import com.projetws.model.LocationRepository;
 
@@ -22,13 +24,17 @@ public class LocationController
 
 	@Autowired
 	LocationRepository locationRepository;
+	@Autowired
+	CountryRepository countryRepository;
 
 	@RequestMapping("/all")
 	public String getAllLocations(Model m)
 	{
 		List<Location> locations = locationRepository.findAll();
+		List<Country> countries = countryRepository.findAll();
 		
 		m.addAttribute("locations", locations);
+		m.addAttribute("countries", countries);
 		return "locations";
 	}
 	
@@ -37,16 +43,22 @@ public class LocationController
 								 @RequestParam("streetAddress") String streetAddress, 
 								 @RequestParam("postalCode") String postalCode,
 								 @RequestParam("city") String city,
-								 @RequestParam("stateProvince") String stateProvince)
+								 @RequestParam("stateProvince") String stateProvince,
+								 @RequestParam("countryId") String countryId)
 	{
 		Location location = locationRepository.findByLocationId(locationId);
 		if(location != null)
 		{
-			location.setStreetAddress(streetAddress);
-			location.setPostalCode(postalCode);
-			location.setCity(city);
-			location.setStateProvince(stateProvince);
-			locationRepository.save(location);
+			Country country = countryRepository.findByCountryId(countryId);
+			if (country != null)
+			{
+				location.setStreetAddress(streetAddress);
+				location.setPostalCode(postalCode);
+				location.setCity(city);
+				location.setStateProvince(stateProvince);
+				location.setCountry(country);
+				locationRepository.save(location);
+			}
 		}
 		return "redirect:/location/all";
 	}
