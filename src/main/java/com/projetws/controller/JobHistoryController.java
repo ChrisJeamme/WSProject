@@ -3,6 +3,7 @@ package com.projetws.controller;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -60,8 +61,9 @@ public class JobHistoryController
 								   @RequestParam("departmentId") Long departmentId,
 								   @RequestParam("jobId") String jobId)
 	{
-		JobHistory jobHistory = jobHistoryRepository.findById(new JobHistoryPK(employeeId, startDate));
-		if (jobHistory != null)
+		java.sql.Date startDateSql = new java.sql.Date(startDate.getTime());
+		JobHistory jobHistory = jobHistoryRepository.findByIdEmployeeIdAndIdStartDate(employeeId, startDateSql);
+;		if (jobHistory != null)
 		{
 			Department department = departmentRepository.findByDepartmentId(departmentId);
 			Job job = jobRepository.findByJobId(jobId);
