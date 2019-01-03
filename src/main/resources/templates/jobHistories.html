@@ -7,7 +7,7 @@
 		<div>
 			<h3>Update a Job History:</h3>
 			<form id="updateJobHistoryForm" th:action="@{updateJobHistory}" method="post">
-				<div class="form-group">
+				<div class="form-group form-row justify-content-md-center">
                     <label> Employee ID: <input type="text" name="employeeId" id="formemployeeId" class="form-control"/></label>
                     <label> Start date: <input type="date" name="startDate" id="formStartDate" class="form-control"/></label>
                     <label> End date: <input type="date" name="endDate" id="formEndDate" class="form-control"/></label>
@@ -26,7 +26,7 @@
 
         <h2>Job Histories</h2>
         <div>
-			<table class="table countryTable">
+			<table class="table">
 				<thead class="thead-light">
 					<tr>
                         <th>Employee</th>

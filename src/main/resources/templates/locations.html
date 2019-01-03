@@ -7,7 +7,7 @@
 		<div>
 			<h3>Update a location:</h3>
 			<form id="updateLocationForm" th:action="@{updateLocation}" method="post">
-				<div class="form-group">
+				<div class="form-group form-row justify-content-md-center">
 					<label> ID: <input type="text" name="locationId" id="formEditionId" class="form-control"/></label>
                     <label> Street address: <input type="text" name="streetAddress" id="formStreetAddress" class="form-control"/></label>
                     <label> Postal code: <input type="text" name="postalCode" id="formPostalCode" class="form-control"/></label>
@@ -23,7 +23,7 @@
 		</div>
 	
 		<div>
-			<table class="table locationTable">
+			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th><strong>ID</strong></th>

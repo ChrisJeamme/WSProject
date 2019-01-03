@@ -7,7 +7,7 @@
 		<div>
 			<h3>Update a department:</h3>
 			<form id="updateDepartmentForm" th:action="@{updateDepartment}" method="post">
-				<div class="form-group">
+				<div class="form-group form-row justify-content-md-center">
 					<label> ID: <input type="text" name="departmentId" id="formEditionId" class="form-control"/></label>
                     <label> Name: <input type="text" name="departmentName" id="formDepartmentName" class="form-control"/></label>
                     <label> Manager ID: <input type="text" name="managerId" id="formManagerId" class="form-control"/></label>
@@ -21,7 +21,7 @@
 		</div>
 	
 		<div>
-			<table class="table departmentTable">
+			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th><strong>ID</strong></th>

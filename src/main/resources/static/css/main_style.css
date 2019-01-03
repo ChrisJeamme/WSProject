@@ -1,10 +1,6 @@
-
-/* Country */
-
-.countryTable
+.form-row *
 {
-    width: 50%;
-    margin: auto;
+    margin: 4px;
 }
 
 .hide

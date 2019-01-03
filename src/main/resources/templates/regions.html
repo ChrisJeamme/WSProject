@@ -7,7 +7,7 @@
 		<div>
 			<h3>Update a region:</h3>
 			<form id="updateRegionForm" th:action="@{updateRegion}" method="post">
-				<div class="form-group">
+				<div class="form-group form-row justify-content-md-center">
 					<label> ID: <input type="text" name="regionId" id="formEditionId" class="form-control"/></label>
                     <label> Name: <input type="text" name="regionName" id="formRegionName" class="form-control"/></label>
 					<input type="submit" class="btn btn-dark" value="Modify"/> <!-- onclick="ajaxUpdateRegion()" -->
@@ -16,7 +16,7 @@
 		</div>
 	
 		<div>
-			<table class="table regionTable">
+			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th><strong>ID</strong></th>

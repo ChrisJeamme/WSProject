@@ -7,7 +7,7 @@
 		<div>
 			<h3>Update an employee:</h3>
 			<form id="updateEmployeeForm" th:action="@{updateEmployee}" method="post">
-				<div class="form-group">
+				<div class="form-group form-row justify-content-md-center">
 					<label> ID: <input type="text" name="employeeId" id="formEditionId" class="form-control"/></label>
                     <label> First Name: <input type="text" name="employeeFirstName" id="formEmployeeFirstName" class="form-control"/></label>
                     <label> Last Name: <input type="text" name="employeeLastName" id="formEmployeeLastName" class="form-control"/></label>
@@ -18,7 +18,7 @@
                     <label> HireDate: <input type="date" name="employeeHireDate" id="formEmployeeHireDate" class="form-control"/></label>
                     <label> PhoneNumber: <input type="text" name="employeePhoneNumber" id="formEmployeePhoneNumber" class="form-control"/></label>
                     <label> Departement: 
-                    <select id="formDepartementId" name="departementId" class="custom-select">
+                    <select id="formDepartementId" name="departementId" class="custom-select form-control">
                         <option th:each="departement : ${departements}" th:value="${departement.departmentId}" data-th-text="${departement.departmentName}"></option>
                     </select></label>
 					<label> Job: 
@@ -32,7 +32,7 @@
 
         <h2>Employees</h2>
         <div>
-			<table class="table countryTable">
+			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th><strong>ID</strong></th>

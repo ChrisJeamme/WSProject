@@ -7,7 +7,7 @@
 		<div>
 			<h3>Update a job:</h3>
 			<form id="updateJobForm" th:action="@{updateJob}" method="post">
-				<div class="form-group">
+				<div class="form-group form-row justify-content-md-center">
 					<label> ID: <input type="text" name="jobId" id="formEditionId" class="form-control"/></label>
                     <label> Title: <input type="text" name="jobTitle" id="formJobTitle" class="form-control"/></label>
                     <label> Minimum salary: <input type="number" name="minSalary" id="formMinSalary" class="form-control"/></label>
@@ -18,7 +18,7 @@
 		</div>
 	
 		<div>
-			<table class="table jobTable">
+			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th><strong>ID</strong></th>

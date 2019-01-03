@@ -7,7 +7,7 @@
 		<div>
 			<h3>Update a country:</h3>
 			<form id="updateCountryForm" th:action="@{updateCountry}" method="post">
-				<div class="form-group">
+				<div class="form-group form-row justify-content-md-center">
 					<label> ID: <input type="text" name="countryId" id="formEditionId" class="form-control"/></label>
                     <label> Name: <input type="text" name="countryName" id="formCountryName" class="form-control"/></label>
 					<label> Region: 
@@ -20,7 +20,7 @@
 		</div>
 	
 		<div>
-			<table class="table countryTable">
+			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th><strong>ID</strong></th>
