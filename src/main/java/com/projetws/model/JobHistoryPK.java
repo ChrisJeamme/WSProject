@@ -1,6 +1,7 @@
 package com.projetws.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -24,6 +25,10 @@ public class JobHistoryPK implements Serializable {
 	private java.util.Date startDate;
 
 	public JobHistoryPK() {
+	}
+	public JobHistoryPK(Long employeeId, Date startDate) {
+		this.employeeId = employeeId;
+		this.startDate = startDate;
 	}
 	public long getEmployeeId() {
 		return this.employeeId;

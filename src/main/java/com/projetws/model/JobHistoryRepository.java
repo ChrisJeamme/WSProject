@@ -9,4 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface JobHistoryRepository extends PagingAndSortingRepository<JobHistory, Long>
 {
 	List<JobHistory> findAll();
+	
+	JobHistory findById(JobHistoryPK id);
 }	
