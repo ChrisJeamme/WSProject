@@ -25,6 +25,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * User model class
@@ -93,5 +94,67 @@ public class User
         this.mail = mail;
         this.pseudo = userName;
     }
+
+	public String getUserName()
+	{
+		return userName;
+	}
+
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+
+	public String getPseudo()
+	{
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo)
+	{
+		this.pseudo = pseudo;
+	}
+
+	public String getRealName()
+	{
+		return realName;
+	}
+
+	public void setRealName(String realName)
+	{
+		this.realName = realName;
+	}
+
+	public String getPassword()
+	{
+		return password;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public String getMail()
+	{
+		return mail;
+	}
+
+	public void setMail(String mail)
+	{
+		this.mail = mail;
+	}
+
+	public Set<UserRole> getRoles()
+	{
+		return roles;
+	}
+
+	public void setRoles(Set<UserRole> roles)
+	{
+		this.roles = roles;
+	}
+    
+    
 
 }
