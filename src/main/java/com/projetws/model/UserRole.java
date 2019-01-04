@@ -28,7 +28,7 @@ public enum UserRole implements GrantedAuthority
     USER,
     /**
      * Editor
-     */
+     */ 
     EDITOR,
     /**
      * Admin
