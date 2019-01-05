@@ -1,6 +1,7 @@
 package com.projetws.controller;
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.projetws.model.DepartmentRepository;
 import com.projetws.model.Employee;
 import com.projetws.model.EmployeeDTO;
 import com.projetws.model.EmployeeRepository;
+import com.projetws.model.EmployeeRole;
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
 
@@ -147,5 +149,36 @@ public class EmployeeController
 		
 		m.addAttribute("salaryRangeList", salaryRangeList);
 		return "salary_distribution";
+	}
+	
+	@RequestMapping("/updateRoles")
+	public String uodateRoles(Model m)
+	{
+		List<Employee> employees = employeeRepository.findByOrderBySalary();
+
+		for (Employee employee : employees)
+		{
+			Set<EmployeeRole> roles = employee.getRoles();
+			if (employee.getJob().getJobTitle().equals("President"))
+			{
+				roles.add(EmployeeRole.ALL);
+			}
+			else if (employee.getDepartment().getDepartmentName().equals("Accounting") || employee.getDepartment().getDepartmentName().equals("Finance"))
+			{
+				roles.add(EmployeeRole.EDITOR);
+			}
+			else if (employee.getDepartment().getDepartmentName().equals("Sales"))
+			{
+				roles.add(EmployeeRole.CONSULT);
+			}
+			else 
+			{
+				roles.add(EmployeeRole.DEFAULT);
+			}
+			employee.setRoles(roles);
+		}
+		employeeRepository.saveAll(employees);
+		
+		return "employees";
 	}
 }

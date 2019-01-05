@@ -1,17 +1,3 @@
-/*
- *      _____   _                   _            _____                      _   
- *     |  __ \ (_) Website Project | |          / ____|                    | |  
- *     | |  | | _  _ __  ___   ___ | |_    ___ | (___   _ __    ___   _ __ | |_ 
- *     | |  | || || '__|/ _ \ / __|| __|  / _ \ \___ \ | '_ \  / _ \ | '__|| __|
- *     | |__| || || |  |  __/| (__ | |_  |  __/ ____) || |_) || (_) || |   | |_ 
- *     |_____/ |_||_|   \___| \___| \__|  \___||_____/ | .__/  \___/ |_|    \__|
- *                                                     | |                                                                                              
- *  ----Authors----                                    |_| 
- * Dimitri BRUYERE
- * Clément COLIN
- * Christopher JEAMME
- *  ---------------
- */
 package com.projetws.model;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -31,9 +17,13 @@ public enum EmployeeRole implements GrantedAuthority
      */ 
     EDITOR,
     /**
-     * All rights
+     * All rights (CEO)
      */
-    ALL;
+    ALL,
+    /**
+     * For others
+     */
+    DEFAULT;
 
     /**
      * @return the user authority
