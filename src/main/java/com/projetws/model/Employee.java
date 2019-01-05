@@ -2,10 +2,17 @@ package com.projetws.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,6 +20,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.security.core.GrantedAuthority;
 
 
 /**
@@ -22,8 +31,9 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="employees")
 @NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
-public class Employee implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Employee implements Serializable
+{
+	private static final long serialVersionUID = 2L;
 
 	@Id
 	@Column(name="EMPLOYEE_ID")
@@ -50,6 +60,16 @@ public class Employee implements Serializable {
 	@Column(name="PHONE_NUMBER")
 	private String phoneNumber;
 
+	@Column(name="PASSWORD")
+	private String password;
+
+	@Column(name="USERNAME")
+	private String userName;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<EmployeeRole> roles = new HashSet<>();
+
 	private BigDecimal salary;
 
 	//bi-directional many-to-one association to Department
@@ -62,8 +82,7 @@ public class Employee implements Serializable {
 	@JoinColumn(name="JOB_ID")
 	private Job job;
 
-	public Employee() {
-	}
+	public Employee(){}
 
 	public long getEmployeeId() {
 		return this.employeeId;
@@ -153,4 +172,34 @@ public class Employee implements Serializable {
 		this.job = job;
 	}
 
+	public Set<EmployeeRole> getRoles()
+	{
+		return roles;
+	}
+
+	public void setRoles(Set<EmployeeRole> roles)
+	{
+		this.roles = roles;
+	}
+
+	public String getPassword()
+	{
+		return password;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public String getUserName()
+	{
+		return userName;
+	}
+
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+	
 }

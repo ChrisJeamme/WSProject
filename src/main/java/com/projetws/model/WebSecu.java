@@ -38,25 +38,38 @@ public class WebSecu extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-            .antMatchers("/admin").hasAnyAuthority("ADMIN")
-            .antMatchers("/articleCreation").hasAnyAuthority("EDITOR")
+        	.antMatchers("/updateCountry").hasRole("ADMIN")
+        	.antMatchers("/updateDepartment").hasRole("ADMIN")
+        	.antMatchers("/updateJobHistory").hasRole("ADMIN")
+        	.antMatchers("/updateLocation").hasRole("ADMIN")
+        	.antMatchers("/updateRegion").hasRole("ADMIN")
+        	.antMatchers("/updateEmployee").hasRole("EDITOR")
+        	.antMatchers("/updateJob").hasRole("EDITOR")
+        	
+            .antMatchers("/location/all").hasRole("CONSULT")
+            .antMatchers("/region/all").hasRole("CONSULT")
+            .antMatchers("/department/all").hasRole("EDITOR")
+            .antMatchers("/employee/all").hasRole("EDITOR")
+            .antMatchers("/job/all").hasRole("EDITOR")
+            .antMatchers("/jobHistory/all").hasRole("EDITOR")
+            .antMatchers("/country/all").hasRole("EDITOR")
             .and()
             .formLogin()
-            .loginPage("/signin")
+            .loginPage("/login")
             .loginProcessingUrl("/appLogin")
             .usernameParameter("app_username")
             .passwordParameter("app_password")
-            .defaultSuccessUrl("/home")
+            .defaultSuccessUrl("/all")
             .permitAll()
             .and()
             .logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/home")
+            .logoutSuccessUrl("/all")
             .permitAll();
     }
 
     @Autowired
-    UserService userDetailsService;
+    EmployeeService userDetailsService;
 
     /**
      *
@@ -67,9 +80,10 @@ public class WebSecu extends WebSecurityConfigurerAdapter
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
 
-        /*auth.inMemoryAuthentication()
-        .withUser("robert").password("toto").roles("USER", "ADMIN")
-        .and().withUser("bob").password("toto").roles("USER")*/
+        auth.inMemoryAuthentication()
+        .withUser("editor").password("editor").roles("CONSULT", "EDITOR")
+        .and().withUser("consult").password("consult").roles("CONSULT")
+        .and().withUser("admin").password("admin").roles("CONSULT", "EDITOR", "ADMIN");
         auth
             .userDetailsService(userDetailsService)
             .passwordEncoder(userDetailsService.encoder);

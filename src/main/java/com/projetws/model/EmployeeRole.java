@@ -14,30 +14,33 @@
  */
 package com.projetws.model;
 
-import java.util.List;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
- * Repository for users
+ * Enumerate the different roles a employee may have
  */
-public interface UserRepository extends CrudRepository<User, String>
+public enum EmployeeRole implements GrantedAuthority
 {
 
     /**
-     * @return all users
+     * Consult data from locations, regions and country
      */
-    public List<User> findAllByOrderByUserName();
+    CONSULT,
+    /**
+     * Edit access rights for employees and jobs and can consult the rest
+     */ 
+    EDITOR,
+    /**
+     * All rights
+     */
+    ALL;
 
     /**
-     * @param name
-     * @return return the user with the name
+     * @return the user authority
      */
-    public User findByUserName(String name);
-
-    /**
-     * @param mail
-     * @return the user with the mail
-     */
-    public User findByMail(String mail);
-
+    @Override
+    public String getAuthority()
+    {
+        return this.name();
+    }
 }

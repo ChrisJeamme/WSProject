@@ -26,11 +26,11 @@ import org.springframework.stereotype.Component;
  * Class to communicate with the table User in the database
  */
 @Component
-public class UserService implements UserDetailsService
+public class EmployeeService implements UserDetailsService
 {
 
     @Autowired
-    UserRepository repo;
+    EmployeeRepository repo;
 
     /**
      * encoder for passwords 
@@ -46,12 +46,12 @@ public class UserService implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        User u = repo.findByUserName(username);
+        Employee u = repo.findByUserName(username);
         if (u == null)
         {
             throw new UsernameNotFoundException(username);
         }
-        return new org.springframework.security.core.userdetails.User(u.userName, u.password, u.getRoles());
+        return new org.springframework.security.core.userdetails.User(u.getUserName(), u.getPassword(), u.getRoles());
     }
 
     /**
@@ -59,24 +59,17 @@ public class UserService implements UserDetailsService
      * @param u
      * @return 0 (good), 1 (username already exists), 2 (mail already exists)
      */
-    public int addUser(User u)
+    public int addUser(Employee u)
     {
-        if (repo.findByUserName(u.userName) != null)
+        if (repo.findByUserName(u.getUserName()) != null)
         {
             return 1;	//A user with this userName already exists
         }
         else
         {
-            if (repo.findByMail(u.mail) != null)
-            {
-                return 2;	//A user with this mail already exists
-            }
-            else
-            {
-                u.setPassword(encoder.encode(u.password));
-                repo.save(u);
-                return 0;	//The user is added in the database
-            }
+            u.setPassword(encoder.encode(u.getPassword()));
+            repo.save(u);
+            return 0;	//The user is added in the database
         }
     }
 
@@ -86,8 +79,8 @@ public class UserService implements UserDetailsService
      */
     public void makeUserAdmin(String username)
     {
-        User u = repo.findByUserName(username);
-        u.getRoles().add(UserRole.ADMIN);
+    	Employee u = repo.findByUserName(username);
+        u.getRoles().add(EmployeeRole.ALL);
         repo.save(u);
     }
 
@@ -97,8 +90,8 @@ public class UserService implements UserDetailsService
      */
     public void makeUserEditor(String username)
     {
-        User u = repo.findByUserName(username);
-        u.getRoles().add(UserRole.EDITOR);
+    	Employee u = repo.findByUserName(username);
+        u.getRoles().add(EmployeeRole.EDITOR);
         repo.save(u);
     }
 
@@ -110,7 +103,7 @@ public class UserService implements UserDetailsService
      */
     public int changeUserPassword(String userName, String newPassword)
     {
-        User u = repo.findByUserName(userName);
+    	Employee u = repo.findByUserName(userName);
         if (u != null)
         {
             u.setPassword(encoder.encode(newPassword));

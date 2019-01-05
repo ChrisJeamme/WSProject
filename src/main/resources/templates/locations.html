@@ -4,8 +4,8 @@
     <header th:replace="../fragments/header.html :: header('Locations Management')"></header>
 
 	<section class="m-5">
-		<div>
-			<h3>Update a location:</h3>
+		<div sec:authorize="hasRole('ADMIN')">
+            <h3>Update a location:</h3>
 			<form id="updateLocationForm" th:action="@{updateLocation}" method="post">
 				<div class="form-group form-row justify-content-md-center">
 					<label> ID: <input type="text" name="locationId" id="formEditionId" class="form-control"/></label>
@@ -20,7 +20,7 @@
 					<input type="submit" class="btn btn-dark m-3" value="Modify"/> <!-- onclick="ajaxUpdateLocation()" -->
 				</div>
 			</form>
-		</div>
+        </div>
 	
 		<div>
 			<table class="table">

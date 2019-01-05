@@ -14,4 +14,6 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
 	
 	List<Employee> findByOrderBySalary();
 
+	Employee findByUserName(String username);
+
 }
