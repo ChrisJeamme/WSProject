@@ -172,14 +172,19 @@ public class EmployeeController
 		Set<EmployeeRole> roles = new HashSet<>();
 		if (employee.getJob().getJobTitle().equals("President"))
 		{
+			roles.add(EmployeeRole.DEFAULT);
+			roles.add(EmployeeRole.EDITOR);
+			roles.add(EmployeeRole.CONSULT);
 			roles.add(EmployeeRole.ALL);
 		}
 		else if (employee.getDepartment().getDepartmentName().equals("Accounting") || employee.getDepartment().getDepartmentName().equals("Finance"))
 		{
+			roles.add(EmployeeRole.DEFAULT);
 			roles.add(EmployeeRole.EDITOR);
 		}
 		else if (employee.getDepartment().getDepartmentName().equals("Sales"))
 		{
+			roles.add(EmployeeRole.DEFAULT);
 			roles.add(EmployeeRole.CONSULT);
 		}
 		else 
