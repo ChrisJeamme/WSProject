@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -85,6 +86,7 @@ public class EmployeeController
 				employee.setPhoneNumber(employeePhoneNumber);
 				employee.setDepartment(department);
 				employee.setJob(job);
+				updateEmployeeRights(employee);
 				employeeRepository.save(employee);
 			}
 		}
@@ -158,27 +160,32 @@ public class EmployeeController
 
 		for (Employee employee : employees)
 		{
-			Set<EmployeeRole> roles = employee.getRoles();
-			if (employee.getJob().getJobTitle().equals("President"))
-			{
-				roles.add(EmployeeRole.ALL);
-			}
-			else if (employee.getDepartment().getDepartmentName().equals("Accounting") || employee.getDepartment().getDepartmentName().equals("Finance"))
-			{
-				roles.add(EmployeeRole.EDITOR);
-			}
-			else if (employee.getDepartment().getDepartmentName().equals("Sales"))
-			{
-				roles.add(EmployeeRole.CONSULT);
-			}
-			else 
-			{
-				roles.add(EmployeeRole.DEFAULT);
-			}
-			employee.setRoles(roles);
+			updateEmployeeRights(employee);
 		}
 		employeeRepository.saveAll(employees);
 		
 		return "employees";
+	}
+	
+	private void updateEmployeeRights(Employee employee)
+	{
+		Set<EmployeeRole> roles = new HashSet<>();
+		if (employee.getJob().getJobTitle().equals("President"))
+		{
+			roles.add(EmployeeRole.ALL);
+		}
+		else if (employee.getDepartment().getDepartmentName().equals("Accounting") || employee.getDepartment().getDepartmentName().equals("Finance"))
+		{
+			roles.add(EmployeeRole.EDITOR);
+		}
+		else if (employee.getDepartment().getDepartmentName().equals("Sales"))
+		{
+			roles.add(EmployeeRole.CONSULT);
+		}
+		else 
+		{
+			roles.add(EmployeeRole.DEFAULT);
+		}
+		employee.setRoles(roles);
 	}
 }
