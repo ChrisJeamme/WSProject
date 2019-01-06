@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
-import com.projetws.testtools.TestTools;
+import com.projetws.tools.TestTools;
 
 public class JobControllerTest
 {

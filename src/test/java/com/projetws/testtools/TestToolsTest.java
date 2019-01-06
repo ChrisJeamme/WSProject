@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.projetws.tools.TestTools;
+
 public class TestToolsTest
 {
 

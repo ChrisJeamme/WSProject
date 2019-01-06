@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
+import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +39,7 @@ public class JobController
 	@ApiOperation(value = "Update a job", response = ResponseEntity.class)
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity update(@PathVariable String id, @RequestBody Job job)
-	{
+	{	
 		Job j = jobRepository.findByJobId(id);
 		j.setJobTitle(job.getJobTitle());
 		jobRepository.save(j);
@@ -68,6 +69,9 @@ public class JobController
 								@RequestParam("minSalary") Long minSalary,  
 								@RequestParam("maxSalary") Long maxSalary)
 	{
+		if(!SecurityTools.hasRole("ROLE_EDITOR"))
+			return "redirect:/job/all";
+		
 		Job job = jobRepository.findByJobId(id);
 		if(job != null)
 		{

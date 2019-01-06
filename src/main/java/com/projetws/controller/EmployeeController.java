@@ -28,6 +28,7 @@ import com.projetws.model.EmployeeRepository;
 import com.projetws.model.EmployeeRole;
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
+import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 
@@ -69,6 +70,9 @@ public class EmployeeController
 								 @RequestParam("departementId") Long departementId,
 								 @RequestParam("jobId") String jobId)
 	{
+		if(!SecurityTools.hasRole("ROLE_EDITOR"))
+			return "redirect:/employee/all";
+		
 		Employee employee= employeeRepository.findByEmployeeId(employeeId);
 		if(employee != null)
 		{

@@ -13,6 +13,7 @@ import com.projetws.model.Country;
 import com.projetws.model.CountryRepository;
 import com.projetws.model.Region;
 import com.projetws.model.RegionRepository;
+import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 
@@ -41,6 +42,9 @@ public class CountryController
 	@RequestMapping(value="/updateCountry", method=RequestMethod.POST)
 	public String updateCountry(@RequestParam("countryId") String id, @RequestParam("countryName") String name, @RequestParam("regionId") Long regionId)
 	{
+		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+			return "redirect:/country/all";
+		
 		Country country = countryRepository.findByCountryId(id);
 		if(country != null)
 		{

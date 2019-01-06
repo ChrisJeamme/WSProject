@@ -13,6 +13,7 @@ import com.projetws.model.Country;
 import com.projetws.model.CountryRepository;
 import com.projetws.model.Location;
 import com.projetws.model.LocationRepository;
+import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 
@@ -46,6 +47,9 @@ public class LocationController
 								 @RequestParam("stateProvince") String stateProvince,
 								 @RequestParam("countryId") String countryId)
 	{
+		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+			return "redirect:/location/all";
+		
 		Location location = locationRepository.findByLocationId(locationId);
 		if(location != null)
 		{

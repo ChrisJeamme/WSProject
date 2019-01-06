@@ -22,6 +22,7 @@ import com.projetws.model.JobHistory;
 import com.projetws.model.JobHistoryPK;
 import com.projetws.model.JobHistoryRepository;
 import com.projetws.model.JobRepository;
+import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 
@@ -61,6 +62,9 @@ public class JobHistoryController
 								   @RequestParam("departmentId") Long departmentId,
 								   @RequestParam("jobId") String jobId)
 	{
+		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+			return "redirect:/jobHistory/all";
+		
 		java.sql.Date startDateSql = new java.sql.Date(startDate.getTime());
 		JobHistory jobHistory = jobHistoryRepository.findByIdEmployeeIdAndIdStartDate(employeeId, startDateSql);
 ;		if (jobHistory != null)

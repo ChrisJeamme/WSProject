@@ -14,6 +14,7 @@ import com.projetws.model.Department;
 import com.projetws.model.DepartmentRepository;
 import com.projetws.model.Location;
 import com.projetws.model.LocationRepository;
+import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 
@@ -45,6 +46,10 @@ public class DepartmentController
 								   @RequestParam("managerId") Long managerId,
 								   @RequestParam("locationId") Long locationId)
 	{
+
+		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+			return "redirect:/department/all";
+		
 		Department department = departmentRepository.findByDepartmentId(departmentId);
 		if(department != null)
 		{
