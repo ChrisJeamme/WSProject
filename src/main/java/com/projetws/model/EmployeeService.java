@@ -36,8 +36,8 @@ public class EmployeeService implements UserDetailsService
      * encoder for passwords 
      */
     public final PasswordEncoder encoder = new BCryptPasswordEncoder();
-
-    /**
+ 
+    /** 
      * Get the user by username and set the session
      * @param username
      * @return UserDetails
