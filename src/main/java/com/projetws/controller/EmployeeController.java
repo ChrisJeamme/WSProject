@@ -12,6 +12,7 @@ import java.util.Set;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -158,9 +159,9 @@ public class EmployeeController
 	}
 	
 	@RequestMapping("/updateRoles")
-	public String uodateRoles(Model m)
+	public String uodateRoles()
 	{
-		List<Employee> employees = employeeRepository.findByOrderBySalary();
+		List<Employee> employees = employeeRepository.findAll();
 
 		for (Employee employee : employees)
 		{
@@ -197,4 +198,22 @@ public class EmployeeController
 		}
 		employee.setRoles(roles);
 	}
+	
+	@RequestMapping("/generateUsernameAndPassword")
+	public String generateUsernameAndPassword()
+	{
+		List<Employee> employees = employeeRepository.findAll();
+
+		for (Employee employee : employees)
+		{
+			employee.setUserName(employee.getFirstName().toLowerCase()+"."+employee.getLastName().toLowerCase());
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			employee.setPassword(encoder.encode("password"));
+		}
+		employeeRepository.saveAll(employees);
+		
+		return "employees";
+	}
+	
+	
 }
