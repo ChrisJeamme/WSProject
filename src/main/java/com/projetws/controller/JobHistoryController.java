@@ -62,7 +62,7 @@ public class JobHistoryController
 								   @RequestParam("departmentId") Long departmentId,
 								   @RequestParam("jobId") String jobId)
 	{
-		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+		if(!SecurityTools.hasRole("ROLE_ALL"))
 			return "redirect:/jobHistory/all";
 		
 		java.sql.Date startDateSql = new java.sql.Date(startDate.getTime());

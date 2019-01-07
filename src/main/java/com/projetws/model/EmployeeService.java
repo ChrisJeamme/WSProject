@@ -80,7 +80,7 @@ public class EmployeeService implements UserDetailsService
     public void makeUserAdmin(String username)
     {
     	Employee u = repo.findByUserName(username);
-        u.getRoles().add(EmployeeRole.ALL);
+        u.getRoles().add(EmployeeRole.ROLE_ALL);
         repo.save(u);
     }
 
@@ -91,7 +91,7 @@ public class EmployeeService implements UserDetailsService
     public void makeUserEditor(String username)
     {
     	Employee u = repo.findByUserName(username);
-        u.getRoles().add(EmployeeRole.EDITOR);
+        u.getRoles().add(EmployeeRole.ROLE_EDITOR);
         repo.save(u);
     }
 

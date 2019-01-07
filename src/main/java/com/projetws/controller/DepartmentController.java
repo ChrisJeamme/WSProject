@@ -47,7 +47,7 @@ public class DepartmentController
 								   @RequestParam("locationId") Long locationId)
 	{
 
-		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+		if(!SecurityTools.hasRole("ROLE_ALL"))
 			return "redirect:/department/all";
 		
 		Department department = departmentRepository.findByDepartmentId(departmentId);

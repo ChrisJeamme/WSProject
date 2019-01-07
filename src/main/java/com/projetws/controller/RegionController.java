@@ -41,7 +41,7 @@ public class RegionController {
 	public String updateRegion(@RequestParam("regionId") Long id,   
 							   @RequestParam("regionName") String regionName)
 	{
-		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+		if(!SecurityTools.hasRole("ROLE_ALL"))
 			return "redirect:/region/all";
 		
 		Region region = regionRepository.findByRegionId(id);

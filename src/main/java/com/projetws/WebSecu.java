@@ -12,7 +12,7 @@
  * Christopher JEAMME
  *  ---------------
  */
-package com.projetws.model;
+package com.projetws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +23,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.projetws.model.EmployeeService;
 /**
  *
  * @author
@@ -42,14 +44,14 @@ public class WebSecu extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-        	.antMatchers("/updateCountry").hasRole("ADMIN")
-        	.antMatchers("/updateDepartment").hasRole("ADMIN")
-        	.antMatchers("/updateJobHistory").hasRole("ADMIN")
-        	.antMatchers("/updateLocation").hasRole("ADMIN")
-        	.antMatchers("/updateRegion").hasRole("ADMIN")
-        	.antMatchers("/updateEmployee").hasRole("EDITOR")
-        	.antMatchers("/updateJob").hasRole("EDITOR")
-        	
+	    	.antMatchers("/updateCountry").hasRole("ALL")
+	    	.antMatchers("/updateDepartment").hasRole("ALL")
+	    	.antMatchers("/updateJobHistory").hasRole("ALL")
+	    	.antMatchers("/updateLocation").hasRole("ALL")
+	    	.antMatchers("/updateRegion").hasRole("ALL")
+	    	.antMatchers("/updateEmployee").hasRole("EDITOR")
+	    	.antMatchers("/updateJob").hasRole("EDITOR")
+	    	
             .antMatchers("/location/all").hasRole("CONSULT")
             .antMatchers("/region/all").hasRole("CONSULT")
             .antMatchers("/department/all").hasRole("EDITOR")

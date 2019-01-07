@@ -21,4 +21,13 @@ public class SecurityTools
 		}
 		return false;
 	}
+	
+	/**
+     * 
+     * @return true/false
+     */
+    public boolean isConnected()
+    {
+        return (SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+    }
 }

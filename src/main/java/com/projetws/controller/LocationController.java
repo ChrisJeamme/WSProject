@@ -47,7 +47,7 @@ public class LocationController
 								 @RequestParam("stateProvince") String stateProvince,
 								 @RequestParam("countryId") String countryId)
 	{
-		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+		if(!SecurityTools.hasRole("ROLE_ALL"))
 			return "redirect:/location/all";
 		
 		Location location = locationRepository.findByLocationId(locationId);

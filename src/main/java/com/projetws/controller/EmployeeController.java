@@ -159,7 +159,7 @@ public class EmployeeController
 	}
 	
 	@RequestMapping("/updateRoles")
-	public String uodateRoles()
+	public String updateRoles()
 	{
 		List<Employee> employees = employeeRepository.findAll();
 
@@ -177,24 +177,24 @@ public class EmployeeController
 		Set<EmployeeRole> roles = new HashSet<>();
 		if (employee.getJob().getJobTitle().equals("President"))
 		{
-			roles.add(EmployeeRole.DEFAULT);
-			roles.add(EmployeeRole.EDITOR);
-			roles.add(EmployeeRole.CONSULT);
-			roles.add(EmployeeRole.ALL);
+			roles.add(EmployeeRole.ROLE_DEFAULT);
+			roles.add(EmployeeRole.ROLE_EDITOR);
+			roles.add(EmployeeRole.ROLE_CONSULT);
+			roles.add(EmployeeRole.ROLE_ALL);
 		}
 		else if (employee.getDepartment().getDepartmentName().equals("Accounting") || employee.getDepartment().getDepartmentName().equals("Finance"))
 		{
-			roles.add(EmployeeRole.DEFAULT);
-			roles.add(EmployeeRole.EDITOR);
+			roles.add(EmployeeRole.ROLE_DEFAULT);
+			roles.add(EmployeeRole.ROLE_EDITOR);
 		}
 		else if (employee.getDepartment().getDepartmentName().equals("Sales"))
 		{
-			roles.add(EmployeeRole.DEFAULT);
-			roles.add(EmployeeRole.CONSULT);
+			roles.add(EmployeeRole.ROLE_DEFAULT);
+			roles.add(EmployeeRole.ROLE_CONSULT);
 		}
 		else 
 		{
-			roles.add(EmployeeRole.DEFAULT);
+			roles.add(EmployeeRole.ROLE_DEFAULT);
 		}
 		employee.setRoles(roles);
 	}

@@ -42,7 +42,7 @@ public class CountryController
 	@RequestMapping(value="/updateCountry", method=RequestMethod.POST)
 	public String updateCountry(@RequestParam("countryId") String id, @RequestParam("countryName") String name, @RequestParam("regionId") Long regionId)
 	{
-		if(!SecurityTools.hasRole("ROLE_ADMIN"))
+		if(!SecurityTools.hasRole("ROLE_ALL"))
 			return "redirect:/country/all";
 		
 		Country country = countryRepository.findByCountryId(id);

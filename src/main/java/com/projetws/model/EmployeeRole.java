@@ -11,19 +11,19 @@ public enum EmployeeRole implements GrantedAuthority
     /**
      * Consult data from locations, regions and country
      */
-    CONSULT,
+    ROLE_CONSULT,
     /**
      * Edit access rights for employees and jobs and can consult the rest
      */ 
-    EDITOR,
+    ROLE_EDITOR,
     /**
      * All rights (CEO)
      */
-    ALL,
+    ROLE_ALL,
     /**
      * For others
      */
-    DEFAULT;
+    ROLE_DEFAULT;
 
     /**
      * @return the user authority
